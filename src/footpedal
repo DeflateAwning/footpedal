@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import pygtk
-pygtk.require('2.0')
+pygtk.require('2.0') 
 import gtk, gobject
 import threading
 
@@ -75,7 +75,7 @@ class KeyCombo:
 	def xteCommand(self, command, key):
 		args_list = ["xte", "\"" + command + " " + key + "\""]
 		command = " ".join(args_list)
-		print "About to execute:", command
+		print(f"About to execute: {command}")
 		os.system( command )
 
 # =============================================================================
@@ -195,7 +195,7 @@ class ServerThread(threading.Thread):
 					continue
 
 				pedal_byte_values = map(ord, mystring)
-#				print("Numeric representation of string:", pedal_byte_values)
+#				print("Numeric representation of string: {pedal_byte_values}")
 
 				# Split message into signals for each pedal
 				pedal_signals = [pedal_byte_values[self.GROUP_SIZE*i:self.GROUP_SIZE*(i+1)] for i in range(self.PEDAL_COUNT)]
@@ -221,7 +221,7 @@ class ServerThread(threading.Thread):
 	def handle_pedal_press(self, raw_current_pedal_state):
 		"""We interact with the UI in this function, so it must happen in the UI thread via idle_add()"""
 
-#		print("Current state:", raw_current_pedal_state, "Previous state:", self.raw_previous_pedal_state)
+#		print("Current state: {raw_current_pedal_state}, Previous state: {self.raw_previous_pedal_state}")
 		self.app_window.set_foot_position_icon( any(raw_current_pedal_state) )
 
 		# Update treeview and read "disabled" status
